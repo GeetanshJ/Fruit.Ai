@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## Features
 
 ### Login
@@ -22,3 +23,6 @@
 - **Image Upload**: Supports image uploads, allowing users to attach visual content to their FAQs.
 - **User Filtering**: A filter button lets users toggle between viewing all FAQs and only their own, making it easy to manage personal content.
 - **Responsive Design**: The FAQ page is designed to be mobile-friendly and adjusts to various screen sizes.
+=======
+# Fruit.Ai
+>>>>>>> 4919a3f3d61d7fee50ee58d2c5813ae302557ec5
