@@ -1,0 +1,109 @@
+.about-content {
+    text-align: left;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.about-content h2 {
+    color: #ffffff;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.about-content p {
+    color: #f1f1f1;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.navbar {
+    position: relative;
+    width: 100%;
+    background: linear-gradient(160deg, #000000, #033044);
+    color: #fff;
+    z-index: 10;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.fas {
+    font-size: 40px;
+}
+
+.menu-icon {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    gap:50px;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 800;;
+
+}
+
+.nav-links a:hover {
+    color: #fff;
+    text-decoration: none;
+    color:#000000;
+    font-weight: 800;;
+}
+
+.nav-links.active {
+    display: block;
+}
+
+@media (max-width: 800px) {
+    .menu-icon {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: linear-gradient(160deg, #000000, #033044);
+        width: 100%;
+        text-align: center;
+        z-index: 9;
+    }
+
+    .nav-links.active {
+        display: block;
+    }
+
+    .nav-links li {
+        padding: 10px 0;
+    }
+}
