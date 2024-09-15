@@ -34,8 +34,8 @@ const Faq = () => {
             // if (editingId) {
             //     await axios.put(`https://fruit-ai-b.onrender.com/faqs/${editingId}`, formData);
             // } else {
-                await axios.post('https://fruit-ai-b.onrender.com/faqs', formData);
-                console.log(formData)
+            await axios.post('https://fruit-ai-b.onrender.com/faqs', formData);
+            console.log(formData)
             // }
             resetForm();
             fetchFaqs();
@@ -94,7 +94,8 @@ const Faq = () => {
                     <div key={faq._id} className="faq-item">
                         <h3>{faq.question}</h3>
                         <p>{faq.answer}</p>
-                        {faq.image && <img style={{width:"200px",height:"200px",padding:"10px"}} src={`http://localhost:5000/uploads/${faq.image}`} alt="FAQ" />}
+                        {faq.image && <img style={{ width: "200px", height: "200px", padding: "10px" }} src={`https://fruit-ai-b.onrender.com/uploads/${faq.image}`} alt="FAQ" />
+                        }
                         <button onClick={() => editFaq(faq)}>Edit</button>
                         <button onClick={() => deleteFaq(faq._id)}>Delete</button>
                     </div>
