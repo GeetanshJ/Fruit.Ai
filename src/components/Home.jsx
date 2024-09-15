@@ -6,7 +6,7 @@ function Home() {
         <div className="container">
             <h1>Fruit.Ai</h1>
             <p className="tagline">"Be Healthy!"</p>
-            <p className="welcome">Welcome, Mr. User!</p>
+            <p className="welcome">Welcome</p>
             <div className="grid">
                 <Link to="/chat" className="box chat">Chat</Link>
                 <Link to="/translator" className="box translator">Translator</Link>
