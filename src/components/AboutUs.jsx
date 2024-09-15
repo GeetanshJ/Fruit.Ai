@@ -19,9 +19,9 @@ function AboutUs() {
                     </div>
                     <ul className={`nav-links ${isOpen ? 'active' : ''}`}>
                         <li><a href="/">Home</a></li>
-                        <li><a href="#services">Chat</a></li>
-                        <li><a href="#contact">Login</a></li>
-                        <li><a href="#contact">Translator</a></li>
+                        <li><a href="">Chat</a></li>
+                        <li><a href="">Login</a></li>
+                        <li><a href="">Translator</a></li>
                         <li><a href="/faqs">FAQ's</a></li>
 
                     </ul>
