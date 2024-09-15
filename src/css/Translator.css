@@ -1,9 +1,67 @@
-.translator-wrapper {
+.translator-container {
     max-width: 800px;
-    margin: 40px auto;
+    margin: 0 auto;
     padding: 20px;
     font-family: Arial, sans-serif;
-    background: #f9f9f9;
+}
+
+.navbar {
+    background: linear-gradient(160deg, #000000, #00334b);
+    color: #fff;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: background 0.3s ease;
+}
+
+.navbar.open {
+    background: #222;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+}
+
+.menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+    color: #fff;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    z-index: 2000;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-links.active {
+    display: flex;
+}
+
+.translator-wrapper {
+    margin-top: 70px;
+    padding: 20px;
+    background: linear-gradient(160deg, #ffffff, #f9f9f9);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -23,19 +81,20 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    resize: vertical;
 }
 
 .translator-controls {
-    list-style: none;
-    padding: 0;
-    margin: 0;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .control-row {
     display: flex;
     align-items: center;
+    flex: 1;
 }
 
 .control-icons {
@@ -63,6 +122,9 @@ button {
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    margin-top: 10px;
+    display: block;
+    width: 100%;
 }
 
 button:hover {
@@ -70,8 +132,23 @@ button:hover {
 }
 
 @media (max-width: 600px) {
+    .navbar-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
     .translator-wrapper {
-        margin: 50px;
+        margin-top: 80px;
         padding: 10px;
     }
 
@@ -83,4 +160,10 @@ button:hover {
         width: 100%;
         font-size: 14px;
     }
+}
+
+/* Google Translate Box Styling */
+body .skiptranslate,
+body .goog-te-banner-frame {
+    display: none !important;
 }
