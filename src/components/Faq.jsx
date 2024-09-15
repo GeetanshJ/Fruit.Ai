@@ -8,6 +8,11 @@ const Faq = () => {
     const [answer, setAnswer] = useState('');
     const [image, setImage] = useState(null);
     const [editingId, setEditingId] = useState(null);
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleNavbar = () => {
+        setIsOpen(!isOpen);
+    };
 
     useEffect(() => {
         fetchFaqs();
@@ -66,43 +71,54 @@ const Faq = () => {
 
     return (
         <div>
-            <nav>
-                <ul>
-                    <li><a href="/home">Home</a></li>
-                    <li><a href="/">Login</a></li>
-                    <li><a href="/faqs">FAQs</a></li>
-                </ul>
-            </nav>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    placeholder="Question"
-                    value={question}
-                    onChange={(e) => setQuestion(e.target.value)}
-                    required
-                />
-                <textarea
-                    placeholder="Answer"
-                    value={answer}
-                    onChange={(e) => setAnswer(e.target.value)}
-                    required
-                />
-                <input
-                    type="file"
-                    onChange={(e) => setImage(e.target.files[0])}
-                />
-                <button type="submit">{editingId ? 'Update FAQ' : 'Add FAQ'}</button>
-            </form>
-            <div>
-                {faqs.map(faq => (
-                    <div key={faq._id}>
-                        <h3>{faq.question}</h3>
-                        <p>{faq.answer}</p>
-                        {faq.image && <img src={faq.image} alt="FAQ" />}
-                        <button onClick={() => handleEdit(faq)}>Edit</button>
-                        <button onClick={() => handleDelete(faq._id)}>Delete</button>
+            <nav className={`navbar ${isOpen ? 'open' : ''}`}>
+                <div className="navbar-container">
+                    <i className='fas fa-apple-alt'></i>
+                    <div className="menu-icon" onClick={toggleNavbar}>
+                        &#9776;
                     </div>
-                ))}
+                    <ul className={`nav-links ${isOpen ? 'active' : ''}`}>
+                        <li><a href="/home">Home</a></li>
+                        <li><a href="#">Chat</a></li>
+                        <li><a href="/">Login</a></li>
+                        <li><a href="#">Translator</a></li>
+                        <li><a href="/faqs">FAQs</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div className="faq-container">
+
+                <form onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        placeholder="Question"
+                        value={question}
+                        onChange={(e) => setQuestion(e.target.value)}
+                        required
+                    />
+                    <textarea
+                        placeholder="Answer"
+                        value={answer}
+                        onChange={(e) => setAnswer(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="file"
+                        onChange={(e) => setImage(e.target.files[0])}
+                    />
+                    <button type="submit">{editingId ? 'Update FAQ' : 'Add FAQ'}</button>
+                </form>
+                <div className="faq-list">
+                    {faqs.map(faq => (
+                        <div key={faq._id} className="faq-item">
+                            <h3>{faq.question}</h3>
+                            <p>{faq.answer}</p>
+                            {faq.image && <img src={faq.image} alt="FAQ" />}
+                            <button onClick={() => handleEdit(faq)}>Edit</button>
+                            <button onClick={() => handleDelete(faq._id)}>Delete</button>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );
