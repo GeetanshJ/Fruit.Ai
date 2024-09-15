@@ -37,8 +37,8 @@ function Translator() {
 
     const handleTranslate = () => {
         setLoading(true);
-        let url = `https://api.mymemory.translated.net/get?q=${fromText}&langpair=${fromLanguage}|${toLanguage}`;
-
+        const apiUrl = process.env.REACT_APP_TRANSLATE_API_URL;
+        let url = `${apiUrl}?q=${fromText}&langpair=${fromLanguage}|${toLanguage}`;
         fetch(url)
             .then((res) => res.json())
             .then((data) => {
@@ -77,7 +77,6 @@ function Translator() {
                         <li><a href="/home">Home</a></li>
                         <li><a href="">Chat</a></li>
                         <li><a href="/">Login</a></li>
-                        <li><a href="/translator">Translator</a></li>
                         <li><a href="/faqs">FAQ's</a></li>
 
                     </ul>
