@@ -21,7 +21,7 @@ function AboutUs() {
                         <li><a href="/home">Home</a></li>
                         <li><a href="">Chat</a></li>
                         <li><a href="/">Login</a></li>
-                        <li><a href="">Translator</a></li>
+                        <li><a href="/translator">Translator</a></li>
                         <li><a href="/faqs">FAQ's</a></li>
 
                     </ul>

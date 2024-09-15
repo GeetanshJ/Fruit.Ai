@@ -1,0 +1,86 @@
+.translator-wrapper {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.translator-input {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.translator-input textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.translator-controls {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.control-row {
+    display: flex;
+    align-items: center;
+}
+
+.control-icons {
+    display: flex;
+    gap: 10px;
+    margin-right: 10px;
+}
+
+.control-icons .fa-copy,
+.control-icons .fa-volume-high {
+    cursor: pointer;
+}
+
+.exchange-icon {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 600px) {
+    .translator-wrapper {
+        margin: 50px;
+        padding: 10px;
+    }
+
+    .translator-input {
+        padding: 15px;
+    }
+
+    button {
+        width: 100%;
+        font-size: 14px;
+    }
+}

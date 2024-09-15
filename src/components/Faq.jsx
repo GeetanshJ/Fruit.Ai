@@ -81,7 +81,7 @@ const Faq = () => {
                         <li><a href="/home">Home</a></li>
                         <li><a href="#">Chat</a></li>
                         <li><a href="/">Login</a></li>
-                        <li><a href="#">Translator</a></li>
+                        <li><a href="/translator">Translator</a></li>
                         <li><a href="/faqs">FAQs</a></li>
                     </ul>
                 </div>
@@ -113,7 +113,7 @@ const Faq = () => {
                         <div key={faq._id} className="faq-item">
                             <h3>{faq.question}</h3>
                             <p>{faq.answer}</p>
-                            {faq.image && <img src={faq.image} alt="FAQ" />}
+                            {faq.image && <img src={`faq.image`} alt="FAQ" />}
                             <button onClick={() => handleEdit(faq)}>Edit</button>
                             <button onClick={() => handleDelete(faq._id)}>Delete</button>
                         </div>

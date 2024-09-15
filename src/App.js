@@ -5,6 +5,7 @@ import AboutUs from './components/AboutUs';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Faq from './components/Faq';
 import Login from './components/Login';
+import Translator from './components/Translator';
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                 <Route path="/aboutUs" element={<AboutUs />} />
                 <Route path="/faqs" element={<Faq />} />
                 <Route path="/" element={<Login />} />
+                <Route path="/translator" element={<Translator />} />
 
             </Routes>
         </Router>
