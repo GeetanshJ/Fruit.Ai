@@ -15,7 +15,7 @@ const Faq = () => {
 
     const fetchFaqs = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/faqs');
+            const response = await axios.get('https://fruit-ai-b.onrender.com/faqs');
             console.log(response.data)
             setFaqs(response.data);
         } catch (error) {
@@ -32,9 +32,9 @@ const Faq = () => {
 
         try {
             if (editingId) {
-                await axios.put(`http://localhost:5000/faqs/${editingId}`, formData);
+                await axios.put(`https://fruit-ai-b.onrender.com/faqs/${editingId}`, formData);
             } else {
-                await axios.post('http://localhost:5000/faqs', formData);
+                await axios.post('https://fruit-ai-b.onrender.com/faqs', formData);
                 console.log(formData)
             }
             resetForm();
@@ -60,7 +60,7 @@ const Faq = () => {
 
     const deleteFaq = async (id) => {
         try {
-            await axios.delete(`http://localhost:5000/faqs/${id}`);
+            await axios.delete(`https://fruit-ai-b.onrender.com/faqs/${id}`);
             fetchFaqs();
         } catch (error) {
             console.error('Error deleting FAQ:', error);
