@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../css/faq.css';
+import { generateUploadButton } from '@uploadthing/react';
+
+const uploadButton = generateUploadButton({
+    url: 'https://fruit-ai-b.onrender.com/api/uploadthing',
+});
 
 const Faq = () => {
     const [faqs, setFaqs] = useState([]);
@@ -8,6 +13,7 @@ const Faq = () => {
     const [answer, setAnswer] = useState('');
     const [image, setImage] = useState(null);
     const [editingId, setEditingId] = useState(null);
+    const [fileInput, setFileInput] = useState(null);
 
     useEffect(() => {
         fetchFaqs();
@@ -31,12 +37,7 @@ const Faq = () => {
         if (image) formData.append('image', image);
 
         try {
-            // if (editingId) {
-            //     await axios.put(`https://fruit-ai-b.onrender.com/faqs/${editingId}`, formData);
-            // } else {
             await axios.post('https://fruit-ai-b.onrender.com/faqs', formData);
-            console.log(formData)
-            // }
             resetForm();
             fetchFaqs();
         } catch (error) {
@@ -49,6 +50,7 @@ const Faq = () => {
         setAnswer('');
         setImage(null);
         setEditingId(null);
+        if (fileInput) fileInput.value = '';
     };
 
     const editFaq = (faq) => {
@@ -64,6 +66,25 @@ const Faq = () => {
             fetchFaqs();
         } catch (error) {
             console.error('Error deleting FAQ:', error);
+        }
+    };
+
+    const handleFileChange = async (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            try {
+                const { data } = await uploadButton({
+                    file,
+                    onSuccess: (data) => {
+                        setImage(data.url);
+                    },
+                    onError: (error) => {
+                        console.error('Upload failed:', error);
+                    },
+                });
+            } catch (error) {
+                console.error('Error uploading file:', error);
+            }
         }
     };
 
@@ -85,7 +106,8 @@ const Faq = () => {
                 />
                 <input
                     type="file"
-                    onChange={(e) => setImage(e.target.files[0])}
+                    onChange={handleFileChange}
+                    ref={(input) => setFileInput(input)}
                 />
                 <button type="submit">{editingId ? 'Update FAQ' : 'Add FAQ'}</button>
             </form>
@@ -94,8 +116,7 @@ const Faq = () => {
                     <div key={faq._id} className="faq-item">
                         <h3>{faq.question}</h3>
                         <p>{faq.answer}</p>
-                        {faq.image && <img style={{ width: "200px", height: "200px", padding: "10px" }} src={`https://fruit-ai-b.onrender.com/uploads/${faq.image}`} alt="FAQ" />
-                        }
+                        {faq.image && <img style={{ width: "200px", height: "200px", padding: "10px" }} src={faq.image} alt="FAQ" />}
                         <button onClick={() => editFaq(faq)}>Edit</button>
                         <button onClick={() => deleteFaq(faq._id)}>Delete</button>
                     </div>
