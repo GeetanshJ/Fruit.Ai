@@ -22,7 +22,7 @@ function AboutUs() {
                         <li><a href="#services">Chat</a></li>
                         <li><a href="#contact">Login</a></li>
                         <li><a href="#contact">Translator</a></li>
-                        <li><a href="#contact">FAQ's</a></li>
+                        <li><a href="/faqs">FAQ's</a></li>
 
                     </ul>
                 </div>
