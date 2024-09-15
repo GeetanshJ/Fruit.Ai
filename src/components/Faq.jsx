@@ -31,12 +31,12 @@ const Faq = () => {
         if (image) formData.append('image', image);
 
         try {
-            if (editingId) {
-                await axios.put(`https://fruit-ai-b.onrender.com/faqs/${editingId}`, formData);
-            } else {
+            // if (editingId) {
+            //     await axios.put(`https://fruit-ai-b.onrender.com/faqs/${editingId}`, formData);
+            // } else {
                 await axios.post('https://fruit-ai-b.onrender.com/faqs', formData);
                 console.log(formData)
-            }
+            // }
             resetForm();
             fetchFaqs();
         } catch (error) {
