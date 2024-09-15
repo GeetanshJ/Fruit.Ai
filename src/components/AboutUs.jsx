@@ -18,9 +18,9 @@ function AboutUs() {
                         &#9776;
                     </div>
                     <ul className={`nav-links ${isOpen ? 'active' : ''}`}>
-                        <li><a href="/">Home</a></li>
+                        <li><a href="/home">Home</a></li>
                         <li><a href="">Chat</a></li>
-                        <li><a href="">Login</a></li>
+                        <li><a href="/">Login</a></li>
                         <li><a href="">Translator</a></li>
                         <li><a href="/faqs">FAQ's</a></li>
 

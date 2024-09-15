@@ -14,22 +14,26 @@ const Faq = () => {
     const [image, setImage] = useState(null);
     const [editingId, setEditingId] = useState(null);
     const [fileInput, setFileInput] = useState(null);
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleNavbar = () => {
+        setIsOpen(!isOpen);
+    };
 
     useEffect(() => {
-        fetchFaqs();
+        loadFaqs();
     }, []);
 
-    const fetchFaqs = async () => {
+    const loadFaqs = async () => {
         try {
             const response = await axios.get('https://fruit-ai-b.onrender.com/faqs');
-            console.log(response.data)
             setFaqs(response.data);
         } catch (error) {
-            console.error('Error fetching FAQs:', error);
+            console.error('Failed to fetch FAQs:', error);
         }
     };
 
-    const submitForm = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
         formData.append('question', question);
@@ -37,11 +41,19 @@ const Faq = () => {
         if (image) formData.append('image', image);
 
         try {
-            await axios.post('https://fruit-ai-b.onrender.com/faqs', formData);
+            if (editingId) {
+                await axios.put(`https://fruit-ai-b.onrender.com/faqs/${editingId}`, formData, {
+                    headers: { 'Content-Type': 'multipart/form-data' }
+                });
+            } else {
+                await axios.post('https://fruit-ai-b.onrender.com/faqs', formData, {
+                    headers: { 'Content-Type': 'multipart/form-data' }
+                });
+            }
             resetForm();
-            fetchFaqs();
+            loadFaqs();
         } catch (error) {
-            console.error('Error submitting FAQ:', error);
+            console.error('Failed to submit FAQ:', error);
         }
     };
 
@@ -53,19 +65,19 @@ const Faq = () => {
         if (fileInput) fileInput.value = '';
     };
 
-    const editFaq = (faq) => {
+    const handleEdit = (faq) => {
         setQuestion(faq.question);
         setAnswer(faq.answer);
         setImage(null);
         setEditingId(faq._id);
     };
 
-    const deleteFaq = async (id) => {
+    const handleDelete = async (id) => {
         try {
             await axios.delete(`https://fruit-ai-b.onrender.com/faqs/${id}`);
-            fetchFaqs();
+            loadFaqs();
         } catch (error) {
-            console.error('Error deleting FAQ:', error);
+            console.error('Failed to delete FAQ:', error);
         }
     };
 
@@ -73,54 +85,64 @@ const Faq = () => {
         const file = e.target.files[0];
         if (file) {
             try {
-                const { data } = await uploadButton({
-                    file,
-                    onSuccess: (data) => {
-                        setImage(data.url);
-                    },
-                    onError: (error) => {
-                        console.error('Upload failed:', error);
-                    },
-                });
+                const { data } = await uploadButton({ file });
+                setImage(data.url);
             } catch (error) {
-                console.error('Error uploading file:', error);
+                console.error('Failed to upload file:', error);
             }
         }
     };
 
     return (
-        <div className="faq-container">
-            <form onSubmit={submitForm}>
-                <input
-                    type="text"
-                    placeholder="Question"
-                    value={question}
-                    onChange={(e) => setQuestion(e.target.value)}
-                    required
-                />
-                <textarea
-                    placeholder="Answer"
-                    value={answer}
-                    onChange={(e) => setAnswer(e.target.value)}
-                    required
-                />
-                <input
-                    type="file"
-                    onChange={handleFileChange}
-                    ref={(input) => setFileInput(input)}
-                />
-                <button type="submit">{editingId ? 'Update FAQ' : 'Add FAQ'}</button>
-            </form>
-            <div className="faq-list">
-                {faqs.map(faq => (
-                    <div key={faq._id} className="faq-item">
-                        <h3>{faq.question}</h3>
-                        <p>{faq.answer}</p>
-                        {faq.image && <img style={{ width: "200px", height: "200px", padding: "10px" }} src={faq.image} alt="FAQ" />}
-                        <button onClick={() => editFaq(faq)}>Edit</button>
-                        <button onClick={() => deleteFaq(faq._id)}>Delete</button>
+        <div>
+            <nav className={`navbar ${isOpen ? 'open' : ''}`}>
+                <div className="navbar-container">
+                    <i className='fas fa-apple-alt'></i>
+                    <div className="menu-icon" onClick={toggleNavbar}>
+                        &#9776;
                     </div>
-                ))}
+                    <ul className={`nav-links ${isOpen ? 'active' : ''}`}>
+                        <li><a href="/home">Home</a></li>
+                        <li><a href="">Chat</a></li>
+                        <li><a href="/">Login</a></li>
+                        <li><a href="">Translator</a></li>
+                        <li><a href="/faqs">FAQ's</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div className="faq-container">
+                <form onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        placeholder="Question"
+                        value={question}
+                        onChange={(e) => setQuestion(e.target.value)}
+                        required
+                    />
+                    <textarea
+                        placeholder="Answer"
+                        value={answer}
+                        onChange={(e) => setAnswer(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="file"
+                        onChange={handleFileChange}
+                        ref={(input) => setFileInput(input)}
+                    />
+                    <button type="submit">{editingId ? 'Update FAQ' : 'Add FAQ'}</button>
+                </form>
+                <div className="faq-list">
+                    {faqs.map(faq => (
+                        <div key={faq._id} className="faq-item">
+                            <h3>{faq.question}</h3>
+                            <p>{faq.answer}</p>
+                            {faq.image && <img style={{ width: "200px", height: "200px", padding: "10px" }} src={`https://utfs.io/f/${faq.image}`} alt="FAQ" />}
+                            <button onClick={() => handleEdit(faq)}>Edit</button>
+                            <button onClick={() => handleDelete(faq._id)}>Delete</button>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );
